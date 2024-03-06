@@ -4,14 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="36b8d2ed-3b0a-452c-aec8-ee0a029bb393" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/livecode.java" afterDir="false" />
+    <list default="true" id="36b8d2ed-3b0a-452c-aec8-ee0a029bb393" name="Changes" comment="initial push">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Aufgabe_1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Aufgabe_1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Aufgabe_2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Aufgabe_2.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Tätigkeit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tätigkeit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Zeiteintrag.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Zeiteintrag.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/liveCode.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/liveCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/liveCode.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,6 +41,7 @@
     "Application.livecode.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "full.screen.before.presentation.mode": "false",
     "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
@@ -93,11 +90,24 @@
       <workItem from="1709677620171" duration="10000" />
       <workItem from="1709677674957" duration="972000" />
       <workItem from="1709678948721" duration="301000" />
-      <workItem from="1709724139529" duration="1218000" />
+      <workItem from="1709724139529" duration="3956000" />
     </task>
+    <task id="LOCAL-00001" summary="initial push">
+      <option name="closed" value="true" />
+      <created>1709725498781</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1709725498781</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="initial push" />
+    <option name="LAST_COMMIT_MESSAGE" value="initial push" />
   </component>
 </project>

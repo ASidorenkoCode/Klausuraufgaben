@@ -43,9 +43,10 @@ public class Tätigkeit {
             // Laufende Nummer-Prüfung
             if (eintrag.getLaufendeNummer() == zeiteintrag.getLaufendeNummer()) return false;
             // Offenes Ende-Prüfung
-            if (eintrag.getEnde() < 0) return false;
+            if (eintrag.getEnde() < 0 && zeiteintrag.getEnde() < 0) return false;
             // Keine Überschneidungs-Prüfung
-            if (zeiteintrag.getEnde() < eintrag.getBeginn()) return false;
+            if (!(zeiteintrag.getEnde() < eintrag.getBeginn() && eintrag.getEnde() < zeiteintrag.getBeginn()))
+                return false;
         }
         zeiteintraege.add(zeiteintrag);
         Collections.sort(zeiteintraege);
