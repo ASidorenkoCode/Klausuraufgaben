@@ -5,17 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="36b8d2ed-3b0a-452c-aec8-ee0a029bb393" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Klausurvorbereitung.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Aufgabe_1.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Aufgabe_2.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tätigkeit.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Zeiteintrag.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/liveCode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/livecode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Aufgabe_1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Aufgabe_1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Aufgabe_2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Aufgabe_2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tätigkeit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tätigkeit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Zeiteintrag.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Zeiteintrag.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/liveCode.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,23 +37,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Aufgabe_1.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Aufgabe_2.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Aufgabe_1.executor": "Run",
+    "Application.Aufgabe_2.executor": "Run",
+    "Application.liveCode.executor": "Run",
+    "Application.livecode.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -78,6 +76,24 @@
       <workItem from="1708673441833" duration="311000" />
       <workItem from="1708681469764" duration="3649000" />
       <workItem from="1708781863207" duration="2093000" />
+      <workItem from="1709126576627" duration="22000" />
+      <workItem from="1709288042847" duration="122000" />
+      <workItem from="1709288957673" duration="118000" />
+      <workItem from="1709289134859" duration="709000" />
+      <workItem from="1709295847431" duration="1462000" />
+      <workItem from="1709302563403" duration="720000" />
+      <workItem from="1709303354445" duration="1156000" />
+      <workItem from="1709311984057" duration="66000" />
+      <workItem from="1709461780411" duration="2717000" />
+      <workItem from="1709638296006" duration="23000" />
+      <workItem from="1709646371040" duration="37000" />
+      <workItem from="1709646802696" duration="41000" />
+      <workItem from="1709648754787" duration="27000" />
+      <workItem from="1709674963991" duration="2639000" />
+      <workItem from="1709677620171" duration="10000" />
+      <workItem from="1709677674957" duration="972000" />
+      <workItem from="1709678948721" duration="301000" />
+      <workItem from="1709724139529" duration="1218000" />
     </task>
     <servers />
   </component>

@@ -1,20 +1,27 @@
-import java.time.LocalDateTime;
 import java.util.Objects;
 
-public class Zeiteintrag implements Comparable<Zeiteintrag>{
+public class Zeiteintrag implements Comparable<Zeiteintrag> {
     private int laufendeNummer;
     private long beginn;
     private long ende; // if negative -> zeiterfassung läuft noch
     private String bemerkung;
     private boolean abrechenbar;
+    private final int REFERENZMONAT = 1;
+    private final int REFERENZJAHR = 2000;
+    private final int[] MONATSCHALTJAHR = {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    private final int[] MONATJAHR = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    private final int SCHALTJAHRINTAGEN = 366;
+    private final int JAHRINTAGEN = 365;
+
 
     public Zeiteintrag(int laufendeNummer, int beginn) {
-        if (laufendeNummer < 0) throw new IllegalArgumentException("Die laufende Nummer darf nicht negativ sein!");
-        this.laufendeNummer = laufendeNummer;
-        this.beginn = beginn;
+        setLaufendeNummer(laufendeNummer);
+        setBeginn(beginn);
         this.ende = -1;
+        // setze es auf leeren String, damit Output bei leerer Bemerkung nicht null ist
         this.bemerkung = "";
-        this.abrechenbar = true;
+        // setze es standardmäßig false
+        this.abrechenbar = false;
     }
 
     public int getLaufendeNummer() {
@@ -22,6 +29,7 @@ public class Zeiteintrag implements Comparable<Zeiteintrag>{
     }
 
     public void setLaufendeNummer(int laufendeNummer) {
+        if (laufendeNummer < 0) throw new IllegalArgumentException("Die laufende Nummer darf nicht negativ sein!");
         this.laufendeNummer = laufendeNummer;
     }
 
@@ -30,6 +38,7 @@ public class Zeiteintrag implements Comparable<Zeiteintrag>{
     }
 
     public void setBeginn(int beginn) {
+        if (this.beginn < 0) throw new IllegalArgumentException("Der Beginn darf nicht kleiner 0 sein");
         this.beginn = beginn;
     }
 
@@ -39,6 +48,7 @@ public class Zeiteintrag implements Comparable<Zeiteintrag>{
 
     public void setEnde(int ende) {
         if (this.ende < this.beginn) throw new IllegalArgumentException("Das Ende liegt vor dem Beginn");
+        if (this.ende < 0) throw new IllegalArgumentException("Das Ende soll nicht negativ sein.");
         this.ende = ende;
     }
 
@@ -59,8 +69,7 @@ public class Zeiteintrag implements Comparable<Zeiteintrag>{
     }
 
     public double getDauer() {
-        if (this.ende < 0) return this.ende;
-        return (double) (this.ende - this.beginn) / 3600;
+        return (this.ende < 0 ? this.ende : (double) (this.ende - this.beginn) / 3600);
     }
 
     @Override
@@ -79,9 +88,7 @@ public class Zeiteintrag implements Comparable<Zeiteintrag>{
 
     @Override
     public String toString() {
-        return "Start: " + this.beginn + "Ende: " +
-                (this.ende > 0 ? this.ende : "--") +
-                "Bemerkung: " + this.bemerkung;
+        return "Start: " + this.beginn + " Ende: " + (this.ende > 0 ? this.ende : "--") + " Bemerkung: " + this.bemerkung;
     }
 
     @Override
@@ -89,65 +96,42 @@ public class Zeiteintrag implements Comparable<Zeiteintrag>{
         return Long.compare(o.getBeginn(), this.getBeginn());
     }
 
-    public int konvertiereSekundenInTage() {
-        return (int) (getDauer() / 24);
-    }
+    public int[] getTagMonatJahr() {
+        /* Annahme:
+           - Beginn und Ende liegt am gleichen Tag
+           - Wenn Ende im Folgemonat liegt, wird es nicht im aktuellen Monat betrachtet
+         */
+        int tag = (int) (ende / 86400); // ende / (3600*24)
+        int monat = REFERENZMONAT;
+        int jahr = REFERENZJAHR;
 
-    public int getJahr(int days) {
-        int year = 2000;
-        for (int i = 0; i < days; i++) {
-            if (days >= 365 && istSchaltjahr(year)) {
-                days -= 365;
-            } else if (days >= 364) {
-                days -= 364;
-            } else {
-                break;
-            }
-            year++;
+        while (tag >= JAHRINTAGEN) {
+            tag -= istSchaltjahr(jahr) && tag >= SCHALTJAHRINTAGEN ? SCHALTJAHRINTAGEN : JAHRINTAGEN;
+            jahr++;
         }
-        return year;
-    }
 
-    public int getMonat( int year) {
-        int days = getJahr(konvertiereSekundenInTage());
-        int monat = 0;
-        int[] monatSchaltJahr = new int[]{31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-        int[] monatKeinSchaltJahr = new int[]{31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-
-        if (istSchaltjahr(year)) {
-            for (int monatNum : monatSchaltJahr) {
-                if (days >= monatNum) {
-                    days -= monatNum;
-                } else {
-                    monat = monatNum + 1;
-                }
-            }
-        } else {
-            for (int monatNum : monatKeinSchaltJahr) {
-                if (days >= monatNum) {
-                    days -= monatNum;
-                } else {
-                    monat = monatNum + 1;
-                }
-            }
+        for (int elm : (istSchaltjahr(jahr) ? MONATSCHALTJAHR : MONATJAHR)) {
+            if (tag > elm) tag -= elm;
+            monat++;
         }
-        return monat;
+        return new int[]{tag, monat, jahr};
     }
 
-    public boolean istSchaltjahr(long year) {
-        return year % 4 == 0 && year % 100 != 0 || year % 400 == 0;
+    public int getTag() {
+        return getTagMonatJahr()[0];
     }
 
-    // Usage of a library that is allowed :P
-    public long convertSecondsToYear() {
-        LocalDateTime referenzDatum = LocalDateTime.of(2000, 1, 1, 0, 0);
-        LocalDateTime neuesDatum = referenzDatum.plusSeconds(this.beginn);
-        return neuesDatum.getYear();
+    public int getMonat() {
+        return getTagMonatJahr()[1];
     }
 
-    public long convertSecondsToMonth() {
-        LocalDateTime referenzDatum = LocalDateTime.of(2000, 1, 1, 0, 0);
-        LocalDateTime neuesDatum = referenzDatum.plusSeconds(this.beginn);
-        return neuesDatum.getMonthValue();
+    public int getJahr() {
+        return getTagMonatJahr()[2];
     }
+
+    public boolean istSchaltjahr(long jahr) {
+        return jahr % 4 == 0 && jahr % 100 != 0 || jahr % 400 == 0;
+    }
+
+
 }

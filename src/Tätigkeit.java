@@ -7,8 +7,8 @@ public class Tätigkeit {
     private ArrayList<Zeiteintrag> zeiteintraege;
 
     public Tätigkeit(String kunde, double stundensatz) {
-        this.kunde = kunde;
-        this.stundensatz = stundensatz;
+        setKunde(kunde);
+        setStundensatz(stundensatz);
         this.zeiteintraege = new ArrayList<>();
     }
 
@@ -17,6 +17,8 @@ public class Tätigkeit {
     }
 
     public void setKunde(String kunde) {
+        // Nehme an, dass der Kunde einen Namen haben muss
+        if (kunde.isEmpty()) throw new IllegalArgumentException("Der Kunde muss einen Namen besitzen");
         this.kunde = kunde;
     }
 
@@ -25,14 +27,13 @@ public class Tätigkeit {
     }
 
     public void setStundensatz(double stundensatz) {
+        // nehme an, dass der Stundensatz auch 0 sein kann
+        if (stundensatz < 0) throw new IllegalArgumentException("Der Stundensatz darf nicht negativ sein");
         this.stundensatz = stundensatz;
     }
 
-    public ArrayList<Zeiteintrag> getZeiteintraege() {
-        return zeiteintraege;
-    }
-
     public void setZeiteintraege(ArrayList<Zeiteintrag> zeiteintraege) {
+        if (zeiteintraege.isEmpty()) throw new IllegalArgumentException("Die übergebene Liste darf nicht leer sein");
         this.zeiteintraege = zeiteintraege;
     }
 
@@ -44,7 +45,7 @@ public class Tätigkeit {
             // Offenes Ende-Prüfung
             if (eintrag.getEnde() < 0) return false;
             // Keine Überschneidungs-Prüfung
-            if (zeiteintrag.getBeginn() <= eintrag.getEnde()) return false;
+            if (zeiteintrag.getEnde() < eintrag.getBeginn()) return false;
         }
         zeiteintraege.add(zeiteintrag);
         Collections.sort(zeiteintraege);
@@ -52,18 +53,32 @@ public class Tätigkeit {
     }
 
     public static double aufwandImMonat(ArrayList<Tätigkeit> tätigkeiten, String kunde, int jahr, int monat) {
-        double gesamtkosten = 0.0;
+        double aufwand = 0.0;
         for (Tätigkeit tätigkeit : tätigkeiten) {
-            for(Zeiteintrag zeiteintrag: tätigkeit.zeiteintraege) {
-                int tage = zeiteintrag.konvertiereSekundenInTage();
-                int zJahr = zeiteintrag.getJahr(tage);
-                int zMonat = zeiteintrag.getMonat(zJahr);
-                if(zeiteintrag.isAbrechenbar() &&
-                        tätigkeit.kunde.equals(kunde) &&
-                        zJahr == jahr &&
-                        zMonat == monat) gesamtkosten += zeiteintrag.getDauer();
+            if (tätigkeit.kunde.equals(kunde)) for (Zeiteintrag zeiteintrag : tätigkeit.zeiteintraege) {
+                if (zeiteintrag.isAbrechenbar() && zeiteintrag.getJahr() == jahr && zeiteintrag.getMonat() == monat)
+                    aufwand += zeiteintrag.getDauer() * tätigkeit.getStundensatz();
             }
         }
-        return gesamtkosten;
+        return aufwand;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Tätigkeit tätigkeit)) return false;
+
+        if (Double.compare(getStundensatz(), tätigkeit.getStundensatz()) != 0) return false;
+        return getKunde() != null ? getKunde().equals(tätigkeit.getKunde()) : tätigkeit.getKunde() == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        result = getKunde() != null ? getKunde().hashCode() : 0;
+        temp = Double.doubleToLongBits(getStundensatz());
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        return result;
     }
 }
