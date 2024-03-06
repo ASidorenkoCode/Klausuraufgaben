@@ -1,12 +1,12 @@
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Tätigkeit {
+public class Taetigkeit {
     private String kunde;
     private double stundensatz;
     private ArrayList<Zeiteintrag> zeiteintraege;
 
-    public Tätigkeit(String kunde, double stundensatz) {
+    public Taetigkeit(String kunde, double stundensatz) {
         setKunde(kunde);
         setStundensatz(stundensatz);
         this.zeiteintraege = new ArrayList<>();
@@ -53,12 +53,14 @@ public class Tätigkeit {
         return true;
     }
 
-    public static double aufwandImMonat(ArrayList<Tätigkeit> tätigkeiten, String kunde, int jahr, int monat) {
+    public static double aufwandImMonat(ArrayList<Taetigkeit> taetigkeiten, String kunde, int jahr, int monat) {
         double aufwand = 0.0;
-        for (Tätigkeit tätigkeit : tätigkeiten) {
-            if (tätigkeit.kunde.equals(kunde)) for (Zeiteintrag zeiteintrag : tätigkeit.zeiteintraege) {
-                if (zeiteintrag.isAbrechenbar() && zeiteintrag.getJahr() == jahr && zeiteintrag.getMonat() == monat)
-                    aufwand += zeiteintrag.getDauer() * tätigkeit.getStundensatz();
+        for (Taetigkeit taetigkeit : taetigkeiten) {
+            if (taetigkeit.kunde.equals(kunde)) {
+                for (Zeiteintrag zeiteintrag : taetigkeit.zeiteintraege) {
+                    if (zeiteintrag.isAbrechenbar() && zeiteintrag.getJahr() == jahr && zeiteintrag.getMonat() == monat)
+                        aufwand += zeiteintrag.getDauer() * taetigkeit.getStundensatz();
+                }
             }
         }
         return aufwand;
@@ -67,10 +69,10 @@ public class Tätigkeit {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Tätigkeit tätigkeit)) return false;
+        if (!(o instanceof Taetigkeit taetigkeit)) return false;
 
-        if (Double.compare(getStundensatz(), tätigkeit.getStundensatz()) != 0) return false;
-        return getKunde() != null ? getKunde().equals(tätigkeit.getKunde()) : tätigkeit.getKunde() == null;
+        if (Double.compare(getStundensatz(), taetigkeit.getStundensatz()) != 0) return false;
+        return getKunde() != null ? getKunde().equals(taetigkeit.getKunde()) : taetigkeit.getKunde() == null;
     }
 
     @Override

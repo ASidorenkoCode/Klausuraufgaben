@@ -111,8 +111,10 @@ public class Zeiteintrag implements Comparable<Zeiteintrag> {
         }
 
         for (int elm : (istSchaltjahr(jahr) ? MONATSCHALTJAHR : MONATJAHR)) {
-            if (tag > elm) tag -= elm;
-            monat++;
+            if (tag > elm) {
+                tag -= elm;
+                monat++;
+            }
         }
         return new int[]{tag, monat, jahr};
     }
